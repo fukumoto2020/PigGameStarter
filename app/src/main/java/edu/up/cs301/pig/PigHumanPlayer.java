@@ -23,6 +23,8 @@ import android.view.View.OnClickListener;
 public class PigHumanPlayer extends GameHumanPlayer implements OnClickListener {
 
 	/* instance variables */
+    PigHoldAction myHold = new PigHoldAction(this);
+    PigRollAction myRoll = new PigRollAction(this);
 
     // These variables will reference widgets that will be modified during play
     private TextView    playerScoreTextView = null;
@@ -61,6 +63,36 @@ public class PigHumanPlayer extends GameHumanPlayer implements OnClickListener {
     @Override
     public void receiveInfo(GameInfo info) {
         //TODO You will implement this method to receive state objects from the game
+        if(info instanceof PigGameState){
+                this.playerScoreTextView.setText(""+((PigGameState) info).getPlayer0Score());
+                this.oppScoreTextView.setText(""+((PigGameState) info).getPlayer1Score());
+                this.turnTotalTextView.setText(""+((PigGameState) info).getRunningTotal());
+
+            switch (((PigGameState) info).getDieVal()){
+                case 6:
+                    this.dieImageButton.setImageResource(R.drawable.face6);
+                    break;
+                case 5:
+                    this.dieImageButton.setImageResource(R.drawable.face5);
+                    break;
+                case 4:
+                    this.dieImageButton.setImageResource(R.drawable.face4);
+                    break;
+                case 3:
+                    this.dieImageButton.setImageResource(R.drawable.face3);
+                    break;
+                case 2:
+                    this.dieImageButton.setImageResource(R.drawable.face2);
+                    break;
+                case 1:
+                    this.dieImageButton.setImageResource(R.drawable.face1);
+                    break;
+            }
+        }
+        else{
+            this.getTopView();
+            return;
+        }
     }//receiveInfo
 
     /**
@@ -72,6 +104,15 @@ public class PigHumanPlayer extends GameHumanPlayer implements OnClickListener {
      */
     public void onClick(View button) {
         //TODO  You will implement this method to send appropriate action objects to the game
+        switch(button.getId()){
+            case R.id.holdButton:
+                super.game.sendAction(myHold);
+                break;
+            case R.id.dieButton:
+                super.game.sendAction(myRoll);
+                break;
+        }
+
     }// onClick
 
     /**
