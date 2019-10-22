@@ -47,6 +47,7 @@ public class PigComputerPlayer extends GameComputerPlayer {
                 } else {
                     super.game.sendAction(myRoll);
                 }
+              //  super.myTimer.setInterval(10);
             } else {
                 return;
             }

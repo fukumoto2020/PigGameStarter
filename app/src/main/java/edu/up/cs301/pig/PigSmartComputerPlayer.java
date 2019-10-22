@@ -28,8 +28,8 @@ public class PigSmartComputerPlayer extends GameComputerPlayer {
         // TODO  You will implement this method
         if(info instanceof PigGameState) {
             if (super.playerNum == ((PigGameState) info).getPlayerId()) {
-                if (((PigGameState) info).getRunningTotal() >10 || ((PigGameState) info).getPlayer1Score()-((PigGameState) info).getPlayer0Score()>0
-                        || 50- ((PigGameState) info).getPlayer1Score() < 40) {
+                if (((PigGameState) info).getRunningTotal() >15 || ((PigGameState) info).getPlayer1Score()-((PigGameState) info).getPlayer0Score()>0
+                        || ((PigGameState) info).getPlayer1Score() +( (PigGameState) info).getRunningTotal() >50) {
                     super.game.sendAction(myHold);
                 } else {
                     super.game.sendAction(myRoll);

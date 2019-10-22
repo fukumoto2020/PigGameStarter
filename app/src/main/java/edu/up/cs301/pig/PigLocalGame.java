@@ -62,7 +62,7 @@ public class PigLocalGame extends LocalGame {
                 myGameState.setDieVal(random.nextInt(6) + 1);
                 if (myGameState.getDieVal() != 1) {
                     myGameState.setRunningTotal(myGameState.getRunningTotal() + myGameState.getDieVal());
-                } else {
+                } else if (myGameState.getDieVal() == 1){
                     myGameState.setRunningTotal(0);
                     if (myGameState.getPlayerId() == 0) {
                         myGameState.setPlayerId(1);
